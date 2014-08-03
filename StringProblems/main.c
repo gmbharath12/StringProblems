@@ -45,7 +45,7 @@ void isPalindrome (char str[],int  length)
     else printf("\n not palindrome");
 }
 
-void BruteForce(char *x /* pattern */,
+void stringSubstring(char *x /* pattern */,
                 int m   /* length of the pattern */,
                 char *y /* actual string being searched */,
                 int n   /* length of this string */)
@@ -100,7 +100,7 @@ int main(int argc, const char * argv[])
     char *pattern = "hero";
     
     //to find a substring
-    BruteForce(pattern,(unsigned int)strlen(pattern),string,(unsigned int)strlen(teststring));
+    stringSubstring(pattern,(unsigned int)strlen(pattern),string,(unsigned int)strlen(teststring));
     
     //string unique or not
     char s1[] = "adhijkl";
