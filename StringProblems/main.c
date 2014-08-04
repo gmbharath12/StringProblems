@@ -69,6 +69,31 @@ void stringSubstring(char *x /* pattern */,
     }
 }
 
+int stringToInterger(char a[])
+{
+    int sign, offset, n;
+    int i;
+    if (a[0] == '-')
+    {
+        offset = 1;
+        sign = -1;
+    }
+    else
+    {
+        offset = 0;
+        sign = 1;
+    }
+    for (i = offset; a[i] != '\0'; i++)
+    {
+        n = n * 10 + (a[i] - '0');
+    }
+    if (sign == -1)
+    {
+        n = -n;
+    }
+    
+    return n;
+}
 
 void uniqueCharsA(char *s)
 {
@@ -107,6 +132,10 @@ int main(int argc, const char * argv[])
 	uniqueCharsA(s1);
     char s2[] = "adhiiii";
 	uniqueCharsA(s2);
+	
+    char a[] = "-1234";
+    int integerValue = stringToInterger(a);
+    printf("Integer Value of String \"%s\" is %d\n", a,integerValue);
 
 }
 
