@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#define LIMIT 100
 
 void reverse(char *str)
 {
@@ -112,6 +113,37 @@ void uniqueCharsA(char *s)
 	return ;
 }
 
+//The Sieve of Eratosthenes
+
+void findPrimeNumbers()
+{
+    int primes[100], i, j;
+    for (i = 2; i < LIMIT; i++)
+    {
+        primes[i] = 1;
+    }
+    
+    for (i = 2; i < LIMIT; i++)
+    {
+        if (primes[i])
+        {
+            for (j = i; i*j < LIMIT; j++)
+            {
+                primes[i*j] = 0;
+            }
+        }
+    }
+    
+    printf("\n First n Prime numbers \n ");
+    for (i = 2; i < LIMIT; i++)
+    {
+        if (primes[i])
+        {
+            printf("\n %d \n", i);
+        }
+    }
+}
+
 int main(int argc, const char * argv[])
 {
     char string[100];
@@ -136,6 +168,8 @@ int main(int argc, const char * argv[])
     char a[] = "-1234";
     int integerValue = stringToInterger(a);
     printf("Integer Value of String \"%s\" is %d\n", a,integerValue);
+
+    findPrimeNumbers();
 
 }
 
