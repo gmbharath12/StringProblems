@@ -144,6 +144,17 @@ void findPrimeNumbers()
     }
 }
 
+int divide(int x, int y)
+{
+    int quotient = 0;
+    while (x >= y) {
+        x  -=  y; // (if numerator is not equal or less than the divisor)
+        quotient++;
+    }
+    return quotient;
+}
+
+
 int main(int argc, const char * argv[])
 {
     char string[100];
@@ -170,6 +181,14 @@ int main(int argc, const char * argv[])
     printf("Integer Value of String \"%s\" is %d\n", a,integerValue);
 
     findPrimeNumbers();
+    
+        int x = 250;
+    int y = 5;
+    
+    //works fine for all positive numbers, but not for negative numbers
+    int r = divide(x ,y);
+    printf("%d\n" , r);
+
 
 }
 
