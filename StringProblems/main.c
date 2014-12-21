@@ -231,6 +231,22 @@ bool areAnagram(char *str1, char *str2)
     return 1;
 }
 
+//Adds 2 numbers without using arithmetic operator
+int addTwoNumbers(int x, int y)
+{
+    
+    int carry;
+    
+    while (y != 0)
+    {
+        carry = x & y;
+        x = x^y;
+        y = carry << 1 ;
+    }
+    return x;
+    
+}
+
 int main(int argc, const char * argv[])
 {
     char string[100];
@@ -276,5 +292,9 @@ int main(int argc, const char * argv[])
         printf("The two strings are not anagram of each other");
     
     return 0;
+
+    int sum = addTwoNumbers(5,3);
+    
+    printf("\n Sum = %d \n \n", sum);
 
 }
