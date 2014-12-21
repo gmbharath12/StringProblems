@@ -188,22 +188,41 @@ char *removeDups(char *str)
 
 bool areAnagram(char *str1, char *str2)
 {
-    // Create an array and initialize all values as 0
+    
+     int lengthString1 = (int) strlen(str1);
+     int lengthString2 = (int) strlen(str2);
+    
+    if (lengthString1 != lengthString2)
+    {
+        return 0;
+    }
+    
     int array[NO_OF_CHARS] = {0};
     int i;
     
-    // For each character in input strings, increment count in
-    // the corresponding array array
-    for (i = 0; str1[i] && str2[i];  i++)
+    while (*str1)
     {
-        array[str1[i]]++;
-        array[str2[i]]--;
+        array[*str1]++;
+        str1++;
+    }
+    while (*str2)
+    {
+        array[*str2]--;
+        str2++;
     }
     
-    // If both strings are of different length. Removing this condition
-    // will make the program fail for strings like "aaca" and "aca"
-    if (str1[i] || str2[i])
-        return 0;
+//    // For each character in input strings, increment count in
+//    // the corresponding array array
+//    for (i = 0; str1[i] && str2[i];  i++)
+//    {
+//        array[str1[i]]++;
+//        array[str2[i]]--;
+//    }
+//    
+//    // If both strings are of different length. Removing this condition
+//    // will make the program fail for strings like "aaca" and "aca"
+//    if (str1[i] || str2[i])
+//        return 0;
     
     // See if there is any non-zero value in an array
     for (i = 0; i < NO_OF_CHARS; i++)
