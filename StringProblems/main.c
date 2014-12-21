@@ -6,10 +6,6 @@
 //  Copyright (c) 2013 Bharath G M. All rights reserved.
 //
 
-#include <stdio.h>
-#include <string.h>
-#define LIMIT 100
-
 void reverse(char *str)
 {
     char *str1 = str;
@@ -46,7 +42,7 @@ void isPalindrome (char str[],int  length)
     else printf("\n not palindrome");
 }
 
-void stringSubstring(char *x /* pattern */,
+void BruteForce(char *x /* pattern */,
                 int m   /* length of the pattern */,
                 char *y /* actual string being searched */,
                 int n   /* length of this string */)
@@ -68,6 +64,24 @@ void stringSubstring(char *x /* pattern */,
             printf("\n Match found at\n\n->[%d]\n->[%s]\n",j,y+j);
         }
     }
+}
+
+
+void uniqueCharsA(char *s)
+{
+	int arr[256]={0};
+    
+    
+	while(*s) {
+		arr[*s]++ ;
+		if(arr[*s] > 1) {
+			printf("%c is not unique\n", *s);
+			return;
+		}
+		s++;
+	}
+	printf("unique\n");
+	return ;
 }
 
 int stringToInterger(char a[])
@@ -96,27 +110,12 @@ int stringToInterger(char a[])
     return n;
 }
 
-void uniqueCharsA(char *s)
-{
-	int arr[256]={0};
-    
-    
-	while(*s) {
-		arr[*s]++ ;
-		if(arr[*s] > 1) {
-			printf("%c is not unique\n", *s);
-			return;
-		}
-		s++;
-	}
-	printf("unique\n");
-	return ;
-}
-
 //The Sieve of Eratosthenes
 
 void findPrimeNumbers()
 {
+    #define LIMIT 100
+
     int primes[100], i, j;
     for (i = 2; i < LIMIT; i++)
     {
@@ -155,6 +154,64 @@ int divide(int x, int y)
 }
 
 
+# define NO_OF_CHARS 256
+# define bool int
+
+/* Function removes duplicate characters from the string
+ This function work in-place and fills null characters
+ in the extra space left */
+char *removeDups(char *str)
+{
+    bool bin_hash[NO_OF_CHARS] = {0};
+    int ip_ind = 0, res_ind = 0;
+    char temp;
+    
+    /* In place removal of duplicate characters*/
+    while(*(str + ip_ind))
+    {
+        temp = *(str + ip_ind);
+        if(bin_hash[temp] == 0)
+        {
+            bin_hash[temp] = 1;
+//            *(str + res_ind) = *(str + ip_ind);
+            res_ind++;
+        }
+        ip_ind++;
+    }
+    
+    /* After above step string is stringiittg.
+     Removing extra iittg after string*/
+    *(str+res_ind) = '\0';   
+    
+    return str;
+}
+
+bool areAnagram(char *str1, char *str2)
+{
+    // Create an array and initialize all values as 0
+    int array[NO_OF_CHARS] = {0};
+    int i;
+    
+    // For each character in input strings, increment count in
+    // the corresponding array array
+    for (i = 0; str1[i] && str2[i];  i++)
+    {
+        array[str1[i]]++;
+        array[str2[i]]--;
+    }
+    
+    // If both strings are of different length. Removing this condition
+    // will make the program fail for strings like "aaca" and "aca"
+    if (str1[i] || str2[i])
+        return 0;
+    
+    // See if there is any non-zero value in an array
+    for (i = 0; i < NO_OF_CHARS; i++)
+        if (array[i])
+            return 0;
+    return 1;
+}
+
 int main(int argc, const char * argv[])
 {
     char string[100];
@@ -168,27 +225,37 @@ int main(int argc, const char * argv[])
     char *pattern = "hero";
     
     //to find a substring
-    stringSubstring(pattern,(unsigned int)strlen(pattern),string,(unsigned int)strlen(teststring));
+    BruteForce(pattern,(unsigned int)strlen(pattern),string,(unsigned int)strlen(teststring));
     
     //string unique or not
     char s1[] = "adhijkl";
 	uniqueCharsA(s1);
     char s2[] = "adhiiii";
 	uniqueCharsA(s2);
-	
+
     char a[] = "-1234";
     int integerValue = stringToInterger(a);
     printf("Integer Value of String \"%s\" is %d\n", a,integerValue);
-
+    
     findPrimeNumbers();
     
-        int x = 250;
+    int x = 250;
     int y = 5;
     
     //works fine for all positive numbers, but not for negative numbers
     int r = divide(x ,y);
     printf("%d\n" , r);
 
+//    char* dup = "here";
+//    removeDups(dup);
+    char str1[] = "geeksforgeeks";
+    char str2[] = "forgeeksgeeks";
+    
+    if ( areAnagram(str1, str2) )
+        printf("The two strings are anagram of each other");
+    else
+        printf("The two strings are not anagram of each other");
+    
+    return 0;
 
 }
-
