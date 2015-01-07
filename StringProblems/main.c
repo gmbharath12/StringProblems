@@ -6,6 +6,13 @@
 //  Copyright (c) 2013 Bharath G M. All rights reserved.
 //
 
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+
 void reverse(char *str)
 {
     char *str1 = str;
@@ -231,21 +238,76 @@ bool areAnagram(char *str1, char *str2)
     return 1;
 }
 
-//Adds 2 numbers without using arithmetic operator
+
+
 int addTwoNumbers(int x, int y)
 {
     
-    int carry;
-    
-    while (y != 0)
+    // Iterate till there is no carry
+    while (y > 0)
     {
-        carry = x & y;
-        x = x^y;
-        y = carry << 1 ;
+        // carry now contains common set bits of x and y
+        int carry = x & y;
+
+        // Sum of bits of x and y where at least one of the bits is not set
+        x = x ^ y;
+        
+        // Carry is shifted by one so that adding it to x gives the required sum
+        y = carry << 1;
     }
     return x;
+}
+
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void randomizeArray(int array[], int size)
+{
+    srand( time(NULL));
+    int i = 0;
+    for (i = size-1; i > 0 ; i--)
+    {
+        int x = rand() % (i+1);
+        printf("\n Random value = %d ", x);
+        swap(&array[i], &array[x]);
+    }
+    
+    for (i = 0; i < size; i++)
+    {
+        printf("\n %d \n ", array[i]);
+    }
     
 }
+
+
+void swapChars (char *x, char *y)
+{
+    char temp;
+    temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+void permute(char *a, int i, int n)
+{
+    int j;
+    if (i == n)
+        printf("%s\n", a);
+    else
+    {
+        for (j = i; j <= n; j++)
+        {
+            swapChars(&((a[i])), &((a[j])));
+            permute(a, i+1, n);
+            swapChars((&a[i]), (&a[j])); //backtrack
+        }
+    }
+}
+
 
 int main(int argc, const char * argv[])
 {
@@ -281,20 +343,31 @@ int main(int argc, const char * argv[])
     int r = divide(x ,y);
     printf("%d\n" , r);
 
-//    char* dup = "here";
+    char* dup = "here";
 //    removeDups(dup);
     char str1[] = "geeksforgeeks";
     char str2[] = "forgeeksgeeks";
     
-    if ( areAnagram(str1, str2) )
+    if (areAnagram(str1, str2) )
         printf("The two strings are anagram of each other");
     else
         printf("The two strings are not anagram of each other");
+
+    int sum = addTwoNumbers(3,7);
+    printf("\n Sum = %d \n \n", sum);
     
+    int array[] = {1,2,3,4,5};
+    int sizeArray = sizeof(array)/sizeof(array[1]);
+    randomizeArray(array,sizeArray);
+
+    char permuteArray[] = "ABC";
+    permute(permuteArray, 0, 2);
+    getchar();
     return 0;
 
-    int sum = addTwoNumbers(5,3);
-    
-    printf("\n Sum = %d \n \n", sum);
-
 }
+
+
+
+
+
