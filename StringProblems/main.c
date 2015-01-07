@@ -77,8 +77,7 @@ void BruteForce(char *x /* pattern */,
 void uniqueCharsA(char *s)
 {
 	int arr[256]={0};
-    
-    
+	
 	while(*s) {
 		arr[*s]++ ;
 		if(arr[*s] > 1) {
@@ -113,12 +112,10 @@ int stringToInterger(char a[])
     {
         n = -n;
     }
-    
     return n;
 }
 
 //The Sieve of Eratosthenes
-
 void findPrimeNumbers()
 {
     #define LIMIT 100
@@ -195,7 +192,6 @@ char *removeDups(char *str)
 
 bool areAnagram(char *str1, char *str2)
 {
-    
      int lengthString1 = (int) strlen(str1);
      int lengthString2 = (int) strlen(str2);
     
@@ -364,7 +360,6 @@ int main(int argc, const char * argv[])
     permute(permuteArray, 0, 2);
     getchar();
     return 0;
-
 }
 
 
