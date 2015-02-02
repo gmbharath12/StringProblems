@@ -77,7 +77,8 @@ void BruteForce(char *x /* pattern */,
 void uniqueCharsA(char *s)
 {
 	int arr[256]={0};
-	
+    
+    
 	while(*s) {
 		arr[*s]++ ;
 		if(arr[*s] > 1) {
@@ -112,10 +113,12 @@ int stringToInterger(char a[])
     {
         n = -n;
     }
+    
     return n;
 }
 
 //The Sieve of Eratosthenes
+
 void findPrimeNumbers()
 {
     #define LIMIT 100
@@ -192,6 +195,7 @@ char *removeDups(char *str)
 
 bool areAnagram(char *str1, char *str2)
 {
+    
      int lengthString1 = (int) strlen(str1);
      int lengthString2 = (int) strlen(str2);
     
@@ -288,6 +292,7 @@ void swapChars (char *x, char *y)
     *y = temp;
 }
 
+
 void permute(char *a, int i, int n)
 {
     int j;
@@ -301,6 +306,27 @@ void permute(char *a, int i, int n)
             permute(a, i+1, n);
             swapChars((&a[i]), (&a[j])); //backtrack
         }
+    }
+}
+
+
+void interleave(char* str1, char* str2, char* str, int len)
+{
+    if(str1[0] == '\0' && str2[0] == '\0')
+    {
+        printf("%s\n", str-len);
+        return;
+    }
+    
+    if(str1[0] != '\0')
+    {
+        str[0] = str1[0];
+        interleave(str1+1, str2, str+1, len);
+    }
+    if(str2[0] != '\0')
+    {
+        str[0] = str2[0];
+        interleave(str1, str2+1, str+1, len);
     }
 }
 
@@ -326,7 +352,7 @@ int main(int argc, const char * argv[])
     char s2[] = "adhiiii";
 	uniqueCharsA(s2);
 
-    char a[] = "-1234";
+    char a[] = "12";
     int integerValue = stringToInterger(a);
     printf("Integer Value of String \"%s\" is %d\n", a,integerValue);
     
@@ -358,11 +384,25 @@ int main(int argc, const char * argv[])
 
     char permuteArray[] = "ABC";
     permute(permuteArray, 0, 2);
+
+    
+    int number = 2;
+    number = number | (1 << 1);
+    printf("%d", number);
     getchar();
+    
+    char* S1 = "AB";
+    char* S2 = "CD";
+    
+    int len1 = (int) strlen(str1);
+    int len2 = (int) strlen(str2);
+    int len = len1+len2;
+    
+    char* str = (char*)malloc(len+1);
+    memset(str, 0, len+1);
+    
+    interleave(S1, S2, str, len);
     return 0;
+
 }
-
-
-
-
 
